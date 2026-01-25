@@ -1,23 +1,545 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <!-- JSON-LD Structured Data for Service Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "대전 리모델링 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "대전리모델링 전문업체",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "고객 서비스"
+        }
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "대전광역시"
+      },
+      "description": "대전 지역 맞춤형 아파트, 주택 리모델링 서비스. 합리적인 견적과 꼼꼼한 시공으로 2026년 트렌드를 반영한 인테리어 솔루션을 제공합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "리모델링 서비스 가격",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "대전 전체 리모델링"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "20000000",
+                "priceCurrency": "KRW",
+                "minPrice": "15000000",
+                "maxPrice": "30000000"
+            },
+            "description": "주택 및 아파트 전체 공간을 새롭게 바꾸는 종합 리모델링 서비스"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "대전 부분 리모델링"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "5000000",
+                "priceCurrency": "KRW",
+                "minPrice": "3000000",
+                "maxPrice": "10000000"
+            },
+            "description": "주방, 욕실 등 특정 공간만 진행하는 실속형 리모델링"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "대전 주방 리모델링"
+            },
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "7000000",
+                "priceCurrency": "KRW",
+                "minPrice": "4000000",
+                "maxPrice": "12000000"
+            },
+            "description": "주방 인테리어 디자인 및 시공 전문 서비스"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+      /* Google Fonts for improved readability */
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.8; /* Increased line-height for readability */
+        background-color: #f7f9fb; /* Soft light background */
+        color: #333;
+      }
+      header {
+        background-color: #2c3e50; /* Deep blue/charcoal for professionalism */
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+      nav a:hover {
+        background-color: #34495e;
+      }
+      main {
+        max-width: 1080px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+        background-color: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        border-radius: 12px;
+      }
+      section {
+        padding: 3rem 0;
+        border-bottom: 1px solid #eee;
+      }
+      h1, h2, h3 {
+        color: #1f6f8b; /* Teal accent color for headings */
+        font-weight: 700;
+        margin-top: 0;
+      }
+      h2 {
+        font-size: 2.2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #1f6f8b;
+        margin: 10px auto 0;
+      }
+      p {
+        margin-bottom: 1.5rem;
+      }
+      .keyword-tags {
+        margin: 2rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+      }
+      .keyword-tags a {
+        background-color: #eaf1f7; /* Soft background for tags */
+        color: #1f6f8b;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s;
+        border: 1px solid #d0e0ec;
+      }
+      .keyword-tags a:hover {
+        background-color: #cce0f0;
+        transform: translateY(-2px);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th, td {
+        padding: 1rem;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+      }
+      th {
+        background-color: #1f6f8b;
+        color: white;
+        font-weight: 600;
+        border: none;
+      }
+      td:first-child {
+        font-weight: 500;
+        background-color: #f7f9fb;
+      }
+      dl dt {
+        font-weight: 700;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: #f0f8ff;
+        border-radius: 6px;
+        cursor: pointer;
+        color: #1f6f8b;
+        transition: background-color 0.3s ease;
+      }
+      dl dt:hover {
+        background-color: #e0f0ff;
+      }
+      dl dd {
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem 1.5rem;
+        border: 1px solid #eaf1f7;
+        border-top: none;
+        background-color: #ffffff;
+        border-radius: 0 0 6px 6px;
+        display: none;
+      }
+      dl dt.active + dd {
+        display: block;
+      }
+      .cta-button {
+        display: block;
+        width: fit-content;
+        margin: 2rem auto;
+        background-color: #ff6600; /* Orange accent for CTA */
+        color: white;
+        font-weight: 700;
+        padding: 1.2rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.2s;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3);
+      }
+      .cta-button:hover {
+        background-color: #e65c00;
+        transform: translateY(-2px);
+      }
+      .service-description {
+        margin-bottom: 2rem;
+        padding-left: 1rem;
+      }
+      .service-description h3 {
+        color: #333;
+        font-size: 1.4rem;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 0.5rem;
+      }
+      .form-container {
+        background-color: #f7f9fb;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+        border: 1px solid #e0e0e0;
+      }
+      .form-container input, .form-container select, .form-container textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .form-container button {
+        background-color: #1f6f8b;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+      }
+      .form-container button:hover {
+        background-color: #175e7a;
+      }
+      .external-link {
+        color: #1f6f8b;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .external-link:hover {
+        text-decoration: underline;
+      }
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+        background-color: #eaf1f7;
+        margin-top: 2rem;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>대전 리모델링 & 인테리어 전문 업체</h1>
+        <p><strong>대전 아파트, 주택 리모델링</strong> 합리적인 견적과 꼼꼼한 시공으로 2026년 트렌드를 반영합니다</p>
+        <nav>
+            <ul>
+                <li><a href="#service-intro">서비스 소개</a></li>
+                <li><a href="#price-guide">리모델링 비용</a></li>
+                <li><a href="#portfolio">포트폴리오</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#contact">견적 문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="service-intro">
+            <h2>대전 리모델링, 지금이 적기입니다</h2>
+            <p><strong>대전 리모델링</strong> 전문업체를 찾고 계신가요? 급변하는 주거 환경 트렌드 속에서 단순히 노후된 부분을 개선하는 것을 넘어, 고객님의 삶의 질을 향상시키는 공간 디자인을 제안합니다. 특히 <strong>2026년</strong>을 기점으로 주택 시장에서는 친환경 소재와 스마트 홈 시스템 통합이 핵심 트렌드로 떠오르고 있습니다. 저희 업체는 <strong>대전 아파트 리모델링</strong>을 비롯해 주택, 빌라, 상가 인테리어까지, 고객 맞춤형 솔루션을 제공하며 <strong>대전 인테리어 견적</strong>에 대한 합리적인 해답을 드리고자 노력하고 있습니다.</p>
+            <p><strong>대전 리모델링 업체</strong>를 선정할 때 가장 중요한 것은 '신뢰'입니다. 저희는 투명한 <strong>리모델링 비용</strong> 공개와 전문 시공팀의 책임 시공으로 고객 만족도 최상위를 목표로 합니다. <strong>대전 지역별 리모델링</strong> 특징을 정확히 파악하여, 서구, 유성구, 중구, 동구, 대덕구 등 대전 전 지역에 걸쳐 고객님의 예산에 맞는 최적의 <strong>리모델링 솔루션</strong>을 제공합니다.</p>
+
+            <div class="keyword-tags" aria-label="연관 키워드">
+                <a href="#price-guide">대전리모델링 비용</a>
+                <a href="#service-details">대전아파트인테리어</a>
+                <a href="#service-details">대전주방리모델링</a>
+                <a href="#portfolio">대전리모델링 포트폴리오</a>
+                <a href="#price-guide">대전인테리어 견적비교</a>
+                <a href="#service-details">대전부분리모델링</a>
+                <a href="#contact">대전리모델링 상담</a>
+                <a href="#service-details">대전빌라리모델링</a>
+                <a href="#local-guide">대전 유성구 리모델링</a>
+                <a href="#local-guide">대전 서구 리모델링</a>
+            </div>
+        </section>
+
+        <section id="service-details">
+            <h2>대전 인테리어 & 리모델링 서비스 종류</h2>
+            <p>고객님의 예산과 목적에 맞춰 다양한 형태의 리모델링 서비스를 제공합니다. 리모델링은 크게 전체 리모델링과 부분 리모델링으로 나눌 수 있으며, 각 서비스는 시공 범위에 따라 <strong>비용</strong>과 기간이 달라집니다.</p>
+
+            <div class="service-description">
+                <h3>1. 전체 리모델링 (Full Remodeling)</h3>
+                <p><strong>대전 아파트 전체 리모델링</strong>은 주택의 모든 공간(거실, 주방, 욕실, 방)을 포함하는 종합 인테리어입니다. 노후된 아파트나 주택의 경우 배관, 전기 배선 등의 기초 공사까지 포함되므로 <strong>리모델링 장점</strong>을 극대화할 수 있습니다. <strong>2026년</strong> 기준으로 스마트 홈 시스템과 에너지 절약형 단열 시공이 필수로 고려되고 있으며, <strong>대전 주택 리모델링</strong>에서는 단열 공사가 특히 중요합니다. 전체 리모델링은 초기 투자 비용은 높지만, 주택의 가치를 획기적으로 높이고 장기적인 쾌적함을 보장합니다.</p>
+            </div>
+            <div class="service-description">
+                <h3>2. 부분 리모델링 (Partial Remodeling)</h3>
+                <p><strong>대전 부분 리모델링</strong>은 특정 공간만 집중적으로 개선하는 방식입니다. <strong>대전 주방 리모델링</strong>, <strong>대전 욕실 리모델링</strong>이 대표적이며, 거실 확장이나 도배/장판 교체 등 원하는 부분만 선택적으로 시공할 수 있습니다. <strong>리모델링 단점</strong> 중 하나인 높은 초기 비용 부담을 줄이면서도 만족도를 높일 수 있어 실속형 고객님들께 <strong>추천</strong>됩니다. 특히 <strong>대전 둔산동</strong>이나 <strong>관저동</strong>의 경우, 입주 시기가 오래된 아파트들이 많아 부분 리모델링 수요가 높습니다.</p>
+            </div>
+            <div class="service-description">
+                <h3>3. 주방 및 욕실 리모델링 전문</h3>
+                <p>주방과 욕실은 주거 공간에서 가장 중요한 기능적 공간입니다. <strong>대전 주방 인테리어</strong>는 수납 공간의 효율성, 동선 배치, 식탁 공간 활용 등을 고려하여 맞춤형 디자인을 제안합니다. <strong>대전 욕실 리모델링</strong>은 방수 및 배관 공사가 필수적으로 수반되어야 하므로 전문적인 기술이 요구됩니다. <strong>내돈내산 후기</strong>를 참고하면, 방수 공사 부실로 인한 피해 사례가 많으므로, 업체 선정 시 주의해야 합니다.</p>
+            </div>
+        </section>
+
+        <section id="price-guide">
+            <h2>대전 리모델링 비용 분석 및 견적 가이드</h2>
+            <p><strong>리모델링 비용</strong>은 천차만별입니다. <strong>평균 리모델링 비용</strong>을 궁금해하는 분들이 많지만, 정확한 견적은 현장 실측을 통해서만 가능합니다. <strong>리모델링 가격</strong>에 영향을 미치는 주요 요인은 시공 범위(전체/부분), 자재 등급(일반/고급), 철거 및 폐기물 처리 비용, 그리고 시공팀 인건비입니다. <strong>2026년</strong> 기준으로 자재 가격 변동성이 높기 때문에, 견적 비교 시 반드시 <strong>견적 유효 기간</strong>을 확인하는 것이 중요합니다.</p>
+
+            <h3>1. 아파트 평형별 대략적인 리모델링 예상 금액 (2026년 기준)</h3>
+            <p>아래 표는 <strong>대전 아파트 리모델링</strong> 시공 범위에 따른 대략적인 <strong>예상 금액</strong>입니다. 이는 단순 참고용이며, 정확한 <strong>리모델링 견적</strong>은 방문 상담을 통해 무료로 확인하실 수 있습니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>아파트 평형</th>
+                        <th>부분 리모델링 (최소)</th>
+                        <th>전체 리모델링 (중급)</th>
+                        <th>고급 리모델링 (최대)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20평대 (59㎡~84㎡)</td>
+                        <td>300만원 ~ 800만원</td>
+                        <td>1,500만원 ~ 2,500만원</td>
+                        <td>3,000만원 이상</td>
+                    </tr>
+                    <tr>
+                        <td>30평대 (84㎡~114㎡)</td>
+                        <td>500만원 ~ 1,200만원</td>
+                        <td>2,000만원 ~ 3,500만원</td>
+                        <td>4,000만원 이상</td>
+                    </tr>
+                    <tr>
+                        <td>40평대 이상 (114㎡~)</td>
+                        <td>800만원 ~ 1,500만원</td>
+                        <td>3,000만원 ~ 5,000만원</td>
+                        <td>6,000만원 이상</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>리모델링 비용 절약 방법:</strong> <strong>저렴한곳</strong>을 찾기보다는 합리적인 <strong>가성비</strong>를 찾는 것이 중요합니다. 시공 범위 중 불필요한 마감재 교체 대신, 필수적인 기능 개선에 집중하고, 자재 선택 시 전문가의 조언을 받아보세요.</p>
+
+            <h3>2. 리모델링 비용 자동 계산기 (간단 입력)</h3>
+            <p>아래 입력란을 통해 <strong>예상 리모델링 금액</strong>을 간단하게 계산해볼 수 있습니다. <strong>대전 리모델링 견적</strong>을 비교할 때 참고 자료로 활용해 보세요.</p>
+            <div class="form-container">
+                <form id="price-calculator">
+                    <label for="area">이사할 집 평형대:</label>
+                    <input type="number" id="area" placeholder="예: 30평" required>
+
+                    <label for="type">리모델링 유형:</label>
+                    <select id="type">
+                        <option value="partial">부분 리모델링 (주방, 욕실 등)</option>
+                        <option value="full">전체 리모델링 (올수리)</option>
+                    </select>
+
+                    <label for="style">원하는 인테리어 스타일:</label>
+                    <select id="style">
+                        <option value="modern">모던 스타일</option>
+                        <option value="classic">클래식 스타일</option>
+                        <option value="nordic">북유럽 스타일</option>
+                        <option value="minimal">미니멀 스타일</option>
+                    </select>
+
+                    <button type="button" onclick="calculatePrice()">예상 비용 확인하기</button>
+                    <p id="result-text" style="margin-top: 1rem; font-weight: bold; color: #ff6600;"></p>
+                </form>
+            </div>
+        </section>
+
+        <section id="local-guide">
+            <h2>대전 지역별 리모델링 특징 및 성공 전략</h2>
+            <p><strong>대전 리모델링</strong>은 지역별 주택 특성을 고려해야 성공할 수 있습니다. <strong>대전광역시</strong>는 유성구, 서구, 중구, 동구, 대덕구 등 5개 자치구로 구성되어 있으며, 각 구마다 주택 형태와 주거 환경에 차이가 있습니다. <strong>대전 리모델링 추천</strong> 업체를 찾을 때, 해당 지역 시공 경험이 많은지 확인하는 것이 중요합니다.</p>
+            <p><strong>대전 유성구 리모델링:</strong> <br> 유성구는 <strong>도안신도시</strong>와 <strong>노은지구</strong> 등 비교적 신축 아파트 단지가 많습니다. 하지만 90년대 후반에 지어진 아파트들도 많아 <strong>도안동 리모델링</strong> 수요가 꾸준합니다. 특히, <strong>대전 노은동 리모델링</strong>은 결로 현상이나 단열 문제 해결을 위한 공사가 중요하게 다뤄집니다. <strong>유성구 리모델링</strong> 시공 시에는 신축 아파트의 경우 부분 인테리어 수요가 높고, 구축 아파트는 전체 리모델링 수요가 높습니다.</p>
+            <p><strong>대전 서구 리모델링:</strong> <br> <strong>대전 둔산동 리모델링</strong>은 서구의 중심지인 만큼 주거 밀도가 높고, 비교적 고가 주택이 밀집해 있습니다. <strong>대전 탄방동</strong>이나 <strong>관저동 리모델링</strong> 시에는 고급 자재를 선호하는 경향이 있으며, 거실 확장이나 주방 구조 변경을 통해 공간 효율을 극대화하는 인테리어가 인기가 많습니다. <strong>서구 아파트 리모델링</strong>은 자재 선택의 폭이 넓어, <strong>견적 비교</strong> 시 다양한 옵션을 제안받을 수 있습니다.</p>
+            <p><strong>대전 중구/동구 리모델링:</strong> <br> 중구와 동구는 대전의 구도심으로, 30년 이상 된 노후 주택과 아파트가 많습니다. <strong>대전 중구 리모델링</strong>은 <strong>선화동</strong>, <strong>대흥동</strong> 일대의 재개발 이슈와 함께 <strong>리모델링 수요</strong>가 증가하고 있습니다. <strong>대전 동구 리모델링</strong> 시에는 <strong>가양동</strong>이나 <strong>자양동</strong> 주택의 경우 배관, 단열, 방수 등 기초 공사 비중이 높아 <strong>리모델링 비용</strong>이 상대적으로 높게 책정될 수 있습니다. <strong>대전 주택 리모델링</strong> 시에는 특히 구조 안전 진단이 필요할 수 있습니다.</p>
+            <p><strong>대전 대덕구 리모델링:</strong> <br> <strong>대전 대덕구 리모델링</strong>은 <strong>송촌동</strong>, <strong>법동</strong> 일대의 아파트를 중심으로 수요가 형성됩니다. 비교적 합리적인 <strong>리모델링 가격</strong>으로 시공을 원하는 고객층이 많아, <strong>가성비 리모델링</strong> 솔루션이 중요합니다.</p>
+        </section>
+
+        <section id="portfolio">
+            <h2>대전 리모델링 포트폴리오</h2>
+            <p>저희 업체가 진행한 <strong>대전 인테리어</strong> 시공 사례를 소개합니다. <strong>대전 아파트 리모델링 후기</strong>와 <strong>내돈내산</strong> 고객 만족도가 높은 포트폴리오를 통해 시공 능력과 디자인 감각을 확인해보세요.</p>
+            <!-- In a real website, this section would display images and case studies -->
+            <ul>
+                <li><strong>대전 서구 둔산동 A아파트 32평:</strong> 모던 & 미니멀 스타일 전체 리모델링. 확장 공사를 통해 개방감을 높이고, 조명 계획을 통해 따뜻한 분위기를 연출했습니다.</li>
+                <li><strong>대전 유성구 노은동 B빌라 25평:</strong> 단열 보강 및 주방 구조 변경 리모델링. 오래된 빌라의 단점을 보완하고, 수납 공간을 극대화하여 쾌적한 주거 환경을 조성했습니다.</li>
+                <li><strong>대전 중구 오류동 C주택 40평:</strong> 1층 상가 및 2층 주거 공간 리모델링. 노후된 외관을 개선하고, 주거 공간은 클래식한 스타일로 시공하여 만족도를 높였습니다.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ) - 대전 리모델링 Q&A</h2>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. <strong>대전 리모델링 견적</strong>은 어떻게 받나요?</dt>
+                <dd><strong>대전 리모델링 업체</strong>를 선정할 때 견적은 매우 중요합니다. 전화 또는 온라인 상담 신청을 통해 이사 예정일, 주택 평수, 원하는 시공 범위를 알려주시면, 현장 방문을 통한 실측 견적을 무료로 진행해 드립니다. <strong>리모델링 견적 비교</strong> 시에는 단순히 총액만 비교하지 마시고, 자재 등급과 시공 범위가 정확히 명시된 <strong>상세 견적서</strong>를 받아보셔야 합니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q2. 리모델링 기간은 얼마나 걸리나요?</dt>
+                <dd><strong>리모델링 기간</strong>은 시공 범위에 따라 크게 달라집니다. <strong>대전 아파트 전체 리모델링</strong>(철거 포함)의 경우 일반적으로 3주에서 4주 정도 소요됩니다. <strong>부분 리모델링</strong>은 1주에서 2주 정도 소요될 수 있습니다. <strong>2026년</strong> 기준으로 리모델링 성수기(봄, 가을)에는 시공팀 스케줄로 인해 기간이 지연될 수 있으므로, 미리 예약하는 것이 좋습니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q3. <strong>리모델링 장점</strong>과 <strong>단점</strong>은 무엇인가요?</dt>
+                <dd><strong>리모델링 장점</strong>은 노후 주택의 가치를 높이고, 고객의 라이프스타일에 맞춘 공간을 창출할 수 있다는 점입니다. 특히 <strong>대전 주택 리모델링</strong>의 경우 단열 및 에너지 효율 개선을 통해 난방비 절약 효과를 볼 수 있습니다. <strong>리모델링 단점</strong>은 시공 중 소음 및 분진 발생, 그리고 예상치 못한 추가 비용 발생 가능성입니다. <strong>리모델링 저렴한곳</strong>만 찾기보다는 <strong>AS 보증</strong>이 확실한 업체를 선택해야 합니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q4. 리모델링 시 <strong>정부 지원</strong>을 받을 수 있나요?</dt>
+                <dd><strong>2026년</strong>에도 정부는 주거 환경 개선을 위한 다양한 정책을 추진하고 있습니다. <strong>주택도시기금</strong>을 통해 주거 환경 개선 자금을 대출받을 수 있으며, 에너지 효율 개선 공사(단열, 창호)에 대해서는 정부 보조금이나 세금 감면 혜택이 있을 수 있습니다. 자세한 내용은 <a class="external-link" href="https://www.mlit.go.kr/index.do" target="_blank">국토교통부</a> 또는 <a class="external-link" href="https://nhuf.molit.go.kr/main.do" target="_blank">주택도시기금</a> 웹사이트를 참고하거나, <a class="external-link" href="https://www.gim.go.kr/main.do" target="_blank">그린리모델링 사업</a> 정보를 확인해보세요.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q5. <strong>리모델링 후기</strong>와 <strong>순위</strong>를 확인하는 방법은 무엇인가요?</dt>
+                <dd><strong>리모델링 후기</strong>는 온라인 커뮤니티나 블로그, 혹은 <a class="external-link" href="https://www.daejeon.go.kr/index.do" target="_blank">대전광역시청 홈페이지</a>의 주거 정책 관련 게시판을 통해 얻을 수 있습니다. <strong>리모델링 순위</strong>는 객관적인 지표가 없기 때문에, 여러 업체의 포트폴리오와 <strong>내돈내산</strong> 고객 후기를 꼼꼼히 <strong>비교</strong>하고, 업체별 <strong>장단점</strong>을 파악하는 것이 중요합니다. 시공 전에 반드시 <a class="external-link" href="https://www.law.go.kr/LSW/main.html" target="_blank">법제처</a>를 통해 건축 관련 법규를 확인하는 것도 안전한 리모델링의 첫걸음입니다.</dd>
+            </dl>
+        </section>
+
+        <section id="contact">
+            <h2>대전 리모델링 견적 문의</h2>
+            <p><strong>대전 인테리어 견적</strong>은 현장 실측을 통해 정확하게 산출됩니다. <strong>2026년 리모델링 트렌드</strong>를 반영한 최적의 솔루션을 제안받고 싶으시다면, 지금 바로 문의해주세요.</p>
+            <div class="form-container">
+                <form id="contact-form">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" placeholder="고객님의 성함을 입력해주세요." required>
+
+                    <label for="phone">연락처:</label>
+                    <input type="tel" id="phone" placeholder="예: 010-1234-5678" required>
+
+                    <label for="location">이사/리모델링 예정 지역:</label>
+                    <select id="location" required>
+                        <option value="">지역 선택</option>
+                        <option value="서구">대전 서구 (둔산동, 관저동, 탄방동, 복수동 등)</option>
+                        <option value="유성구">대전 유성구 (도안동, 노은동, 궁동, 전민동 등)</option>
+                        <option value="중구">대전 중구 (선화동, 대흥동, 오류동, 문화동 등)</option>
+                        <option value="동구">대전 동구 (가양동, 자양동, 용운동, 판암동 등)</option>
+                        <option value="대덕구">대전 대덕구 (송촌동, 법동, 비래동 등)</option>
+                    </select>
+
+                    <label for="service-type">희망 시공 범위:</label>
+                    <select id="service-type" required>
+                        <option value="">선택</option>
+                        <option value="전체 리모델링">전체 리모델링</option>
+                        <option value="부분 리모델링">부분 리모델링</option>
+                        <option value="주방/욕실">주방 및 욕실 리모델링</option>
+                    </select>
+
+                    <label for="comments">추가 요청사항:</label>
+                    <textarea id="comments" placeholder="예산 범위, 희망 시기, 특별히 원하는 인테리어 스타일 등을 자유롭게 작성해주세요." rows="4"></textarea>
+
+                    <button type="submit">무료 견적 상담 신청</button>
+                </form>
+            </div>
+            <p style="text-align: center; margin-top: 2rem;">전화 문의: <strong>010-1234-5678</strong></p>
+            <a href="tel:010-1234-5678" class="cta-button" aria-label="전화로 견적 문의하기">전화로 바로 문의하기</a>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+      // FAQ 아코디언 기능 (접기/펼치기)
+      document.querySelectorAll('dl dt').forEach((dt) => {
+        dt.addEventListener('click', () => {
+          dt.classList.toggle('active');
+          let expanded = dt.getAttribute('aria-expanded') === 'true';
+          dt.setAttribute('aria-expanded', !expanded);
+        });
+        dt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dt.click();
+          }
+        });
+      });
+
+      // Simple price calculator logic (simulated calculation)
+      function calculatePrice() {
+        const area = document.getElementById('area').value;
+        const type = document.getElementById('type').value;
+        const resultText = document.getElementById('result-text');
+
+        let minPrice = 0;
+        let maxPrice = 0;
+
+        if (type === 'partial') {
+          if (area <= 25) {
+            minPrice = 300; maxPrice = 800;
+          } else if (area <= 35) {
+            minPrice = 500; maxPrice = 1200;
+          } else {
+            minPrice = 800; maxPrice = 1500;
+          }
+        } else if (type === 'full') {
+          if (area <= 25) {
+            minPrice = 1500; maxPrice = 2500;
+          } else if (area <= 35) {
+            minPrice = 2000; maxPrice = 3500;
+          } else {
+            minPrice = 3000; maxPrice = 5000;
+          }
+        }
+
+        if (area > 0) {
+          resultText.textContent = `예상 리모델링 비용: ${minPrice}만원 ~ ${maxPrice}만원 (VAT 별도)`;
+        } else {
+          resultText.textContent = "평형대를 정확히 입력해주세요.";
+        }
+      }
+    </script>
+
+  
